@@ -1,0 +1,37 @@
+.upper {
+width: 100vw;
+height: 3rem;
+background-color: #1e1e1e;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0px 2rem;
+}
+
+
+.heading {
+  letter-spacing: -1px;
+  font-size: 1.4rem;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+.name-input {
+  background-color: #101010;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  color: white;
+}
+.editor-container {
+width: 100vw;
+height: 97vh;
+}
+
+.text {
+  font-size: 0.8rem;
+  color: white;
+  font-family: monospace;
+}
