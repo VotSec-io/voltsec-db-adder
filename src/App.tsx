@@ -13,6 +13,11 @@ function App() {
   })
 
   function handleClick() {
+    if (data.name === "" || data.code === "") {
+      alert("Please fill all the fields")
+      return
+    }
+
     startTransition(async () => {
       const res = await fetch(`${API}/db/modules/insert/modules_db`, {
         method: "POST",
@@ -31,6 +36,7 @@ function App() {
       }
     })
   }
+  
   return (
     <div>
       <div className="upper">
