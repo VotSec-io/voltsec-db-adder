@@ -33,6 +33,11 @@ function App() {
       })
       if (res.status === 200) {
         alert("Success, Added")
+        setData({
+          name: "",
+          code: "",
+          collection: "web"
+        })
       }
     })
   }
