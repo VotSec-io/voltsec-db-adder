@@ -1,4 +1,4 @@
-import React, { useState, useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import "./App.css"
 import { Editor } from '@monaco-editor/react'
 import Button from './Button'
