@@ -1,18 +1,35 @@
-import { useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import "./App.css"
 import { Editor } from '@monaco-editor/react'
 import Button from './Button'
+import PopUp from './PopUp'
 
 const API = `https://voltsec-main.onrender.com`
 function App() {
+  const password = "prashant" 
   const [transition, startTransition] = useTransition()
   const [data, setData] = useState({
     name: "",
     code: "",
     collection: "web"
   })
+  const [pop, setPop] = useState(true);
+  const [passIn, setPassIn] = useState("")
 
-  function handleClick() {
+  function checkPass() {
+    if (passIn === password) {
+      setPop(false)
+      localStorage.setItem("auth", "true")
+    }
+  }
+
+  useEffect(() => {
+    const auth = localStorage.getItem("auth")
+    if (auth === "true") {
+      setPop(false)
+    }
+  }, [])
+ function handleClick() {
     if (data.name === "" || data.code === "") {
       alert("Please fill all the fields")
       return
@@ -44,6 +61,14 @@ function App() {
   
   return (
     <div>
+      {
+        pop && 
+      <PopUp
+      input={passIn}
+      setInput={setPassIn}
+      onPress={checkPass}
+      />
+      }
       <div className="upper">
         <h1 className='heading'>Voltsec.io</h1>
         <input type="text" placeholder='Enter file name' className='name-input' value={data.name} onChange={(e) => setData(prev => ({...prev, name: e.target.value}))} />
@@ -53,15 +78,18 @@ function App() {
           <option value="api">API</option>
           <option value="cloud">CLOUD</option>
         </select>
+      <div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
         {
           transition ? (
             <p className='text'>Uploading...</p>
           ) : (
-        <Button 
-        onPress={handleClick}
-        />
+            <Button 
+            onPress={handleClick}
+            />
           )
         }
+        <p style={{color: "orangered", fontFamily: "monospace", cursor: "pointer"}} onClick={() => {localStorage.removeItem("auth"); setPop(true);}}>Revoke Pass</p>
+        </div>
 
       </div>
       <div className="editor-container">
